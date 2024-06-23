@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../model/taskmodel.dart';
 import '../providers/task_provider.dart';
+import '../widgets/textfield_decoration.dart';
 
 class ViewTaskScreen extends StatelessWidget {
   final int index;
@@ -10,9 +11,7 @@ class ViewTaskScreen extends StatelessWidget {
   ViewTaskScreen(this.index, {super.key});
 
   String? title;
-
   String? des;
-
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -45,21 +44,8 @@ class ViewTaskScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Checkbox(
-                      value: task.isDone,
-                      onChanged: (value) {
-                        Provider.of<TaskProvider>(context, listen: false)
-                            .toggleDone(index);
-                      },
-                    ),
-                  ),
                   TextFormField(
-                    decoration: const InputDecoration(
-                      hintText: 'Title',
-                      border: InputBorder.none,
-                    ),
+                    decoration: buildInputDecoration('Title'),
                     style: const TextStyle(
                         fontSize: 20,
                         color: Colors.black87,
@@ -82,8 +68,7 @@ class ViewTaskScreen extends StatelessWidget {
                       top: 12.0,
                     ),
                     child: TextFormField(
-                      decoration: const InputDecoration(
-                          hintText: 'Notes', border: InputBorder.none),
+                      decoration:  buildInputDecoration('Description'),
                       initialValue: task.description,
                       style: const TextStyle(
                         fontSize: 17,
@@ -93,17 +78,28 @@ class ViewTaskScreen extends StatelessWidget {
                       onChanged: (val) {
                         des = val;
                       },
-                      validator: (val) {
-                        if (val!.isEmpty) {
-                          return "Can't be empty !";
-                        } else {
-                          return null;
-                        }
-                      },
+                      validator: (value) => buildValidator(value!),
                     ),
                   ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Row(mainAxisAlignment: MainAxisAlignment.end,
+                      children: [Text('Mark as done'),
+                        Checkbox(
+                          value: task.isDone,
+                          onChanged: (value) {
+                            Provider.of<TaskProvider>(context, listen: false)
+                                .toggleDone(index);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+
                 ]),
           ),
         ));
   }
+
+
 }

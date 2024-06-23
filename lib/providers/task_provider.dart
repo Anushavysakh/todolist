@@ -1,14 +1,15 @@
-import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
+import 'dart:collection';
 
+import 'package:flutter/cupertino.dart';
 import '../model/taskmodel.dart';
 
 class TaskProvider with ChangeNotifier {
-  List<TaskModel> _taskList = [];
+  final List<TaskModel> _taskList = [];
 
   List<TaskModel> get tasks {
-    return [..._taskList];
+    return  _taskList;
   }
+
 
   addNote(TaskModel task) {
     _taskList.add(task);
@@ -23,8 +24,9 @@ class TaskProvider with ChangeNotifier {
     }
   }
 
-  void deleteTask(int id) {
-    _taskList.removeWhere((t) => t.id == id);
+  void deleteTask(int index) {
+    _taskList.removeAt(index);
+    //_taskList.removeWhere((t) => t.id == id);
     notifyListeners();
   }
 

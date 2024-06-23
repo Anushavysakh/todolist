@@ -12,22 +12,22 @@ class TaskModel {
     this.description,
     this.isDone = false,
   });
-
-  factory TaskModel.fromJson(Map<String, dynamic> json) {
-    return TaskModel(
-      id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      isDone: json['isDone'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'title': title,
-      'description': description,
-      'isDone': isDone,
-    };
-  }
+  //
+  // factory TaskModel.fromJson(Map<String, dynamic> json) {
+  //   return TaskModel(
+  //     id: json['id'],
+  //     title: json['title'],
+  //     description: json['description'],
+  //     isDone: json['isDone'],
+  //   );
+  // }
+  //
+  // Map<String, dynamic> toJson() {
+  //   return {
+  //     'id': id,
+  //     'title': title,
+  //     'description': description,
+  //     'isDone': isDone,
+  //   };
+  // }
 }

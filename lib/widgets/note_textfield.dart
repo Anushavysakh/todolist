@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/widgets/textfield_decoration.dart';
 
-class NoteTextfield extends StatefulWidget {
-  TextEditingController controller;
+class NoteTextfield extends StatelessWidget {
+  TextEditingController? controller;
   String hint;
 
   NoteTextfield(this.controller, this.hint, {super.key});
 
   @override
-  State<NoteTextfield> createState() => _NoteTextfeildState();
-}
-
-class _NoteTextfeildState extends State<NoteTextfield> {
-  @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: widget.controller,
+    return TextFormField(
+      controller: controller,
       onChanged: (value) {
-        widget.controller.text = value;
+        controller?.text = value;
       },
-      decoration: InputDecoration(hintText: widget.hint),
+      validator: (value) => buildValidator(value!),
+      decoration: InputDecoration(hintText: hint),
     );
   }
 }

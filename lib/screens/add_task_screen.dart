@@ -24,15 +24,23 @@ class AddTaskScreen extends StatelessWidget {
         child: Column(
           children: [
             addNoteTextField(titleController, 'Title'),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             addNoteTextField(descriptionController, 'Description'),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             TextButton(
               onPressed: () {
+                if (titleController.text.isEmpty || descriptionController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Fields cannot be empty'),
+                    ),
+                  );
+                  return;
+                }
                 TaskModel note = TaskModel(description: descriptionController.text,title: titleController.text);
                 Provider.of<TaskProvider>(context,listen: false).addNote(note);
                 Navigator.of(context).pop();
