@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                         controller: slidableController,
                         startActionPane:
                             ActionPane(
-                                motion: StretchMotion(), children: [
+                                motion: const StretchMotion(), children: [
                           SlidableAction(
                             borderRadius: BorderRadius.circular(20),
                             backgroundColor: Colors.red,
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                                 onChanged: (value) {
                                   Provider.of<TaskProvider>(context,
                                           listen: false)
-                                      .toogleCheckbox(task);
+                                      .toggleCheckbox(task);
                                 },
                               ),
                             ],
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                 )
-              : Center(
+              : const Center(
                   child: Text("No Tasks Added"),
                 );
         },

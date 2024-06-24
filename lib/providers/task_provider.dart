@@ -14,14 +14,16 @@ class TaskProvider with ChangeNotifier {
     _taskList.add(task);
     notifyListeners();
   }
-
   void editTask(TaskModel task) {
     int index = _taskList.indexWhere((t) => t.id == task.id);
     if (index != -1) {
       _taskList[index] = task;
+      notifyListeners();
     }
-    notifyListeners();
   }
+
+
+
 
   void deleteTask(int index) {
     _taskList.removeAt(index);
@@ -29,18 +31,14 @@ class TaskProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  toogleCheckbox(TaskModel  task){
-    final index = _taskList.indexWhere((t) => t.id == task.id,);
-    if(index != -1){
-      _taskList[index].isDone = !_taskList[index].isDone;
-    }
-    notifyListeners();
-  }
-  toggleDone(int index) {
-    final taskIndex = _taskList.indexWhere((note) => note.id == index);
+  toggleCheckbox(TaskModel task) {
+    final index = _taskList.indexWhere(
+      (t) => t.id == task.id,
+    );
     if (index != -1) {
       _taskList[index].isDone = !_taskList[index].isDone;
+      notifyListeners();
     }
-    notifyListeners();
   }
+
 }

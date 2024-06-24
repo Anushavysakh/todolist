@@ -1,17 +1,20 @@
 import 'package:uuid/uuid.dart';
 
 class TaskModel {
-  int? id;
+  String? id ;
   String? title;
   String? description;
   bool isDone;
+
 
   TaskModel({
     this.id,
     this.title,
     this.description,
     this.isDone = false,
-  });
+  }) {
+    id ??= Uuid().v4();
+  }
   //
   // factory TaskModel.fromJson(Map<String, dynamic> json) {
   //   return TaskModel(
