@@ -84,13 +84,17 @@ class ViewTaskScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.topLeft,
                     child: Row(mainAxisAlignment: MainAxisAlignment.end,
-                      children: [Text('Mark as done'),
-                        Checkbox(
-                          value: task.isDone,
-                          onChanged: (value) {
-                            Provider.of<TaskProvider>(context, listen: false)
-                                .toggleDone(index);
+                      children: [const Text('Mark as done'),
+                        Consumer<TaskProvider>(
+                          builder: (context, task, child) {
+                            return Checkbox(
+                              value: task.tasks[index].isDone,
+                              onChanged: (value) {
+                               task.toggleDone(index);
+                              },
+                            );
                           },
+
                         ),
                       ],
                     ),

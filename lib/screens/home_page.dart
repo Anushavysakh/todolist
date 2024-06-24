@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                                 onChanged: (value) {
                                   Provider.of<TaskProvider>(context,
                                           listen: false)
-                                      .toggleDone(index);
+                                      .toogleCheckbox(task);
                                 },
                               ),
                             ],

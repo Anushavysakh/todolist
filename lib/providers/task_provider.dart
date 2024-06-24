@@ -7,9 +7,8 @@ class TaskProvider with ChangeNotifier {
   final List<TaskModel> _taskList = [];
 
   List<TaskModel> get tasks {
-    return  _taskList;
+    return [..._taskList];
   }
-
 
   addNote(TaskModel task) {
     _taskList.add(task);
@@ -20,8 +19,8 @@ class TaskProvider with ChangeNotifier {
     int index = _taskList.indexWhere((t) => t.id == task.id);
     if (index != -1) {
       _taskList[index] = task;
-      notifyListeners();
     }
+    notifyListeners();
   }
 
   void deleteTask(int index) {
@@ -30,8 +29,18 @@ class TaskProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  toogleCheckbox(TaskModel  task){
+    final index = _taskList.indexWhere((t) => t.id == task.id,);
+    if(index != -1){
+      _taskList[index].isDone = !_taskList[index].isDone;
+    }
+    notifyListeners();
+  }
   toggleDone(int index) {
-    _taskList[index].isDone = !_taskList[index].isDone;
+    final taskIndex = _taskList.indexWhere((note) => note.id == index);
+    if (index != -1) {
+      _taskList[index].isDone = !_taskList[index].isDone;
+    }
     notifyListeners();
   }
 }
