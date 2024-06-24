@@ -41,7 +41,7 @@ class AddTaskScreen extends StatelessWidget {
                   );
                   return;
                 }
-                TaskModel note = TaskModel(description: descriptionController.text,title: titleController.text);
+                TaskModel note = TaskModel(description: descriptionController.text,title: titleController.text,);
                 Provider.of<TaskProvider>(context,listen: false).addNote(note);
                 Navigator.of(context).pop();
               },

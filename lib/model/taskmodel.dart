@@ -13,7 +13,7 @@ class TaskModel {
     this.description,
     this.isDone = false,
   }) {
-    id ??= Uuid().v4();
+    id ??= const Uuid().v4();
   }
   //
   // factory TaskModel.fromJson(Map<String, dynamic> json) {

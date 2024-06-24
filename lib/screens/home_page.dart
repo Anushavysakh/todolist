@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/providers/task_provider.dart';
 import 'package:todolist/screens/add_task_screen.dart';
 import 'package:todolist/screens/view_task_screen.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -15,7 +16,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isDone = false;
   SlidableController? slidableController;
-
+  String formattedDate = DateFormat('MMMM dd, yyyy').format(DateTime.now());
+  String formattedTime = DateFormat('HH:mm').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +43,6 @@ class _HomePageState extends State<HomePage> {
                   itemCount: tasks.tasks.length,
                   itemBuilder: (ctx, index) {
                     final task = tasks.tasks[index];
-
                     return InkWell(
                       child: Slidable(
                         controller: slidableController,
